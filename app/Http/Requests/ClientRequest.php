@@ -27,7 +27,7 @@ class ClientRequest extends FormRequest
             'name'=>'required|min:2',
 			      'surname'=>'required|min:2',
             'birthday'=>'required|date:d.M.Y',
-            'oib'=>'required|min:11|max:11',
+            'oib'=>'required|size:11',
             'address'=>'required',
             'homenumber'=>'required',
             'hometown'=>'required'
