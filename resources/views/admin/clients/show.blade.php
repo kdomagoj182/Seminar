@@ -37,11 +37,9 @@
 </div>
 
 <div style="text-align:center">
-
-
-  <button type="button" class="btn btn-dark"><a href="{{ route('clients.edit', $client) }}">Promijeni podatke</a></button>
+    <button type="button" class="btn btn-dark"><a href="{{ route('clients.edit', $client) }}">Promijeni podatke</a></button>
   <br><br>
-  <button type="button" class="btn btn-dark"><a href="{{ route('results.create', $client->id) }}">Izvrši procjenu</a></button>
+    <button type="button" class="btn btn-dark"><a href="{{ route('results.create', $client->id) }}">Izvrši procjenu</a></button>
   <br><br>
   <form method="post" action="{{ route('clients.destroy', $client) }}">
      @csrf
@@ -50,28 +48,28 @@
   </form>
 
     @if(count($client->result)>0)
-    @foreach($client->result as $result)
-      @php
-      $sum=$result->result;
-      @endphp
-        @if($sum<=3)
-        <br>
-          <br>Korisnik/ca je procijenjen/a na <strong>niskoj</strong> razini rizika.
-          <br>Procjena je izvršena {{ $result->created_at->diffForHumans() }}.<br>
-          Procjenu je izvršio/la: {{$client->user->name}}.
-         <br>
-        @elseif($sum>3 && $sum<=6)
-          <br>Korisnik/ca je procijenjen/a na <strong>srednjoj</strong> razini rizika.
-          <br>Procjena je izvršena {{ $result->created_at->diffForHumans() }}.<br>
-          Procjenu je izvršio/la: {{$client->user->name}}.
-        <br>
-        @else
-          <br>Korisnik/ca je procijenjen/a na <strong>visokoj</strong> razini rizika.
-          <br>Procjena je izvršena {{ $result->created_at->diffForHumans() }}.<br>
-          Procjenu je izvršio/la: {{$client->user->name}}.
-        <br>
-        @endif
-    @endforeach
+      @foreach($client->result as $result)
+        @php
+        $sum=$result->result;
+        @endphp
+          @if($sum<=3)
+          <br>
+            <br>Korisnik/ca je procijenjen/a na <strong>niskoj</strong> razini rizika.
+            <br>Procjena je izvršena {{ $result->created_at->diffForHumans() }}.<br>
+            Procjenu je izvršio/la: {{$client->user->name}}.
+           <br>
+          @elseif($sum>3 && $sum<=6)
+            <br>Korisnik/ca je procijenjen/a na <strong>srednjoj</strong> razini rizika.
+            <br>Procjena je izvršena {{ $result->created_at->diffForHumans() }}.<br>
+            Procjenu je izvršio/la: {{$client->user->name}}.
+          <br>
+          @else
+            <br>Korisnik/ca je procijenjen/a na <strong>visokoj</strong> razini rizika.
+            <br>Procjena je izvršena {{ $result->created_at->diffForHumans() }}.<br>
+            Procjenu je izvršio/la: {{$client->user->name}}.
+          <br>
+          @endif
+      @endforeach
     @else
     <br>Procjena nije izvršena.
     @endif
