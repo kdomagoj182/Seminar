@@ -39,12 +39,23 @@
 <div style="text-align:center">
     <button type="button" class="btn btn-dark"><a href="{{ route('clients.edit', $client) }}">Promijeni podatke</a></button>
   <br><br>
-    <button type="button" class="btn btn-dark"><a href="{{ route('results.create', $client->id) }}">Izvrši procjenu</a></button>
+    <button type="button" class="btn btn-dark"><a href="{{ route('results.create', $client) }}">Izvrši procjenu</a></button>
   <br><br>
-  <form method="post" action="{{ route('clients.destroy', $client) }}">
+  <form method="post" id="delete-form" action="{{ route('clients.destroy', $client) }}">
      @csrf
      @method('DELETE')
-    <button type="submit" class="btn btn-danger">Izbriši korisnika</a></button>
+    <button type="submit"><a
+           href="#"
+               onclick="
+               var result = confirm('Jeste li sigurni da želite izbrisati korisnika: {{ $client->name }} {{ $client->surname }}?');
+                   if( result ){
+                           event.preventDefault();
+                           document.getElementById('delete-form').submit();
+                   }
+                       "
+                       >
+               Izbriši korisnika
+           </a></button>
   </form>
 
     @if(count($client->result)>0)

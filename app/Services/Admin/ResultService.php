@@ -6,6 +6,7 @@ use Auth;
 use Exception;
 use Storage;
 use App\Models\Result;
+use App\Models\Client;
 
 class ResultService
 {
@@ -24,13 +25,13 @@ class ResultService
      *
      * @return View
      */
-	 public function createResult($id)
+	 public function createResult($client)
     {
-        return view('admin.results.create')->with('client_id',$id);
+        return view('admin.results.create')->with('client',$client);
     }
 
 	/**
-     * Store a newly created result for a Cslient.
+     * Store a newly created result for a Client.
      *
      * @return Redirect
      */
@@ -42,11 +43,14 @@ class ResultService
        $school = $_POST['school'];
        $sum=$isolation+$going_out+$school;
 
+       $clientId=json_decode($request->client);
+       $clientId=$clientId->id;
        # Data to be stored after evaluation
        $data=[
        'result' =>$sum,
-       'client_id' =>$request->get('client_id')
+       'client_id' =>$clientId
      ];}
+
      # Instance Result model
      $result=new Result();
      # Save new Result
@@ -58,7 +62,7 @@ class ResultService
      }
 
      session()->flash('success', 'Uspješno ste izvršili procjenu.');
-     return redirect()->route('clients.index');
+     return redirect()->route('clients.show', $clientId);
       }
 
 	 /**
@@ -69,7 +73,7 @@ class ResultService
      */
     public function showResult(Client $client)
     {
-        //
+      //
     }
 
 
@@ -80,7 +84,7 @@ class ResultService
      */
 	 public function editResult($client)
     {
-        return view('admin.clients.edit')->with('client', $client);
+        //
     }
 
 	 /**

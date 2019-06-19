@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Services\Admin\ResultService;
 use App\Http\Requests\ResultRequest;
 use App\Models\Result;
+use App\Models\Client;
 
 class ResultController extends Controller
 {
@@ -39,9 +40,9 @@ class ResultController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id)
+    public function create(Client $client)
     {
-        return $this->resultService->createResult($id);
+        return $this->resultService->createResult($client);
     }
 
     /**
@@ -51,7 +52,7 @@ class ResultController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(ResultRequest $request)
-    {
+    {  
         return $this->resultService->storeResult($request);
     }
 
@@ -61,9 +62,9 @@ class ResultController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Client $client)
     {
-        //
+      //
     }
 
     /**

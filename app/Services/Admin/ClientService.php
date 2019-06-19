@@ -23,11 +23,6 @@ class ClientService
       $clients=Client::where('user_id', $currentUserId)->orderBy('surname')->with('user')->paginate(7);
       return view('admin.clients.index')->with('clients', $clients);
 
-      /* $clients=Client::all();
-      Pokušao sam da svi klijenti budu vidljivi svim userima, tako da svaki user
-      vidi procjene i drugih usera i da može napraviti svoju procjenu, ali onda ostatak koda
-      ->orderBy('surname')->with('user')->paginate(7) nije radio. Može pomoć ili rješenje direktno u kod? Hvala */
-
     }
 
 	 /**
@@ -128,8 +123,7 @@ class ClientService
   			return redirect()->back();
   		}
 
-      session()->flash('update', 'Korisniku ' .$client->name.' '.$client->surname. ' su uspješno promijenjeni podaci.');
-  		#return redirect()->route('clients.index'); ne radi iz nekog razloga, prebačeno u ClientController
+      session()->flash('update', 'Korisniku su uspješno promijenjeni podaci.');
 
     }
 
@@ -148,7 +142,6 @@ class ClientService
 			return redirect()->back();
 		}
       session()->flash('danger','Uspješno ste obrisali korisnika.');
-      #return redirect()->route('clients.index'); ne radi iz nekog razloga, prebačeno u ClientController
     }
 }
 

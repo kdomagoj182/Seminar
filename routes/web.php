@@ -24,6 +24,5 @@ Route::prefix('admin')->group(function () {
    Route::resource('clients', 'Admin\ClientController');
    // Result routes
    Route::resource('results', 'Admin\ResultController');
-   Route::get('results/create/{id}', 'Admin\ResultController@create')->name('results.create');
-   Route::get('results/create/{client_id}', 'Admin\ResultController@create')->name('results.create');
+   Route::get('results/create/{client}', 'Admin\ResultController@create')->name('results.create');
 });

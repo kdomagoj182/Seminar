@@ -90,8 +90,7 @@ class ClientController extends Controller
     public function update(ClientRequest $request, Client $client)
     {
         $this->clientService->updateClient($request, $client);
-        return redirect()->route('clients.index');
-        # ova ruta ne radi iz CLientService-a iz nekog razloga, isto kao i destroy()
+        return redirect()->route('clients.show', $client->id)->with('client', $client);
     }
 
     /**
@@ -104,6 +103,5 @@ class ClientController extends Controller
     {
         $this->clientService->deleteClient($client);
         return redirect()->route('clients.index');
-        # ova ruta ne radi iz CLientService-a iz nekog razloga
     }
 }
